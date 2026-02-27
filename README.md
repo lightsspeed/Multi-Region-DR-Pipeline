@@ -14,7 +14,11 @@ The infrastructure consists of a Primary Region (Active) and a DR Region (Standb
 dr-pipeline/
 ├── terraform/          # Infrastructure as Code
 ├── app/                # Flask Health-check & testing App
-├── scripts/            # Python & Powershell Scripts for Simulation
+├── scripts/            
+│   ├── python/         # Python simulation scripts
+│   └── powershell/     # PowerShell simulation scripts
+├── config/             # Configuration files (SSM parameters, etc)
+├── docs/               # Architecture diagrams and reports
 └── README.md
 ```
 
@@ -23,7 +27,7 @@ dr-pipeline/
 1. **Pre-requisites**
    - AWS CLI configured with admin credentials.
    - Terraform installed.
-   - Python 3 with `pip install -r requirements.txt`.
+   - Python 3 with `pip install -r scripts/python/requirements.txt`.
 
 2. **Deployment**
    ```bash
@@ -36,20 +40,20 @@ dr-pipeline/
 
 1. **Seed Data (Writes to Primary)**
    ```powershell
-   .\seed_data.ps1
+   .\scripts\powershell\seed_data.ps1
    ```
-   Or `python seed_data.py`
+   Or `python scripts/python/seed_data.py`
 2. **Check Health (Validates Primary ALB/ASG)**
    ```bash
-   python check_health.py
+   python scripts/python/check_health.py
    ```
 3. **Verify Replication (Reads from DR Replica)**
    ```bash
-   python verify_replication.py
+   python scripts/python/verify_replication.py
    ```
 4. **Simulate Failover (Promotes DR database & Updates Route53)**
    ```bash
-   python simulate_failover.py
+   python scripts/python/simulate_failover.py
    ```
 
 ## Clean Up
