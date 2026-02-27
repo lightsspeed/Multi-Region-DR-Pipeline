@@ -74,6 +74,8 @@ graph TB
     RDS_P -.->|Async Replication| RDS_D
 ```
 
+![Architecture Diagram](docs/architecture.png)
+
 ## Project Structure
 ```text
 dr-pipeline/
